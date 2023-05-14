@@ -5,6 +5,9 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Scaffold(
+      backgroundColor: Color(0xFF202124),
+      body: Column(),
+    );
   }
 }
