@@ -14,6 +14,7 @@ class SignInCubit extends Cubit<SignInState> {
     if (result.isSuccess()) {
       emit(SignInSuccess());
     } else if (result.isError()) {
+      print('sdfsdf');
       emit(SignInFailure());
     }
   }

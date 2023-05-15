@@ -16,6 +16,7 @@ class ImplAuthRepository implements IAuthRepository {
       final result = await _authDataSource.signIn(email, password);
       return Success(result!);
     } catch (e) {
+      print('qerqrqr');
       return Error(AuthFailure());
     }
   }

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
             create: (context) => SignInCubit(context.read<IAuthRepository>()),
           ),
         ],
-        child: const MaterialApp(
+        child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Order Tracking',
           home: SignInPage(),

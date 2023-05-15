@@ -6,8 +6,13 @@ import 'package:order_app/core/bloc/sign_in/sign_in_cubit.dart';
 import 'package:order_app/core/bloc/sign_in/sign_in_state.dart';
 import 'package:order_app/feature/screens/home/home_page.dart';
 
+import '../../global/custom_button.dart';
+import '../../global/custom_text_field.dart';
+
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+  SignInPage({super.key});
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,54 +27,49 @@ class SignInPage extends StatelessWidget {
             context.navigateToPage(const HomePage());
           }
         },
-        listenWhen: (_, current) => current is SignInFailure || current is SignInSuccess,
         buildWhen: (_, current) => current is! SignInSuccess,
+        listenWhen: (_, current) => current is SignInFailure || current is SignInSuccess,
         builder: (context, state) {
-          return Form(
+          return SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const _SignInLogo(),
-                    const SizedBoxH24(),
-                    Text(
-                      "Log In",
-                      style: GoogleFonts.quicksand(color: Colors.white, fontSize: 32),
-                    ),
-                    const SizedBoxH24(),
-                    const CustomTextField(
-                      icon: Icons.person_2_outlined,
-                      title: 'Enter your email adresss',
-                    ),
-                    const SizedBoxH16(),
-                    const CustomTextField(
-                      icon: Icons.key,
-                      title: 'Enter your password',
-                    ),
-                    const SizedBoxH24(),
-                    InkWell(
-                      child: Container(
-                        width: context.mediaQuery.size.width * 0.7,
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                            gradient: LinearGradient(colors: [Colors.blue, Colors.blueAccent])),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                            child: Text(
-                              'Log In',
-                              style: GoogleFonts.quicksand(color: Colors.white, fontSize: 28),
-                            ),
-                          ),
+              padding: const EdgeInsets.only(top: 100),
+              child: Form(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const _SignInLogo(),
+                        const SizedBoxH28(),
+                        Text(
+                          "Log In",
+                          style: GoogleFonts.quicksand(color: Colors.white, fontSize: 32),
                         ),
-                      ),
-                    )
-                  ],
+                        const SizedBoxH28(),
+                        CustomTextField(
+                          controller: emailController,
+                          icon: Icons.person_2_outlined,
+                          title: 'Enter your email adresss',
+                        ),
+                        const SizedBoxH20(),
+                        CustomTextField(
+                          controller: passwordController,
+                          icon: Icons.key,
+                          title: 'Enter your password',
+                        ),
+                        const SizedBoxH28(),
+                        CustomButton(
+                          onTap: () {
+                            context
+                                .read<SignInCubit>()
+                                .signInUser(emailController.text, passwordController.text);
+                          },
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -93,6 +93,19 @@ class SizedBoxH16 extends StatelessWidget {
   }
 }
 
+class SizedBoxH20 extends StatelessWidget {
+  const SizedBoxH20({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      height: 20,
+    );
+  }
+}
+
 class SizedBoxH24 extends StatelessWidget {
   const SizedBoxH24({
     super.key,
@@ -106,29 +119,28 @@ class SizedBoxH24 extends StatelessWidget {
   }
 }
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
+class SizedBoxH28 extends StatelessWidget {
+  const SizedBoxH28({
     super.key,
-    required this.title,
-    required this.icon,
   });
-  final String title;
-  final IconData icon;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(20), color: const Color(0xFF3C3E42)),
-      child: TextFormField(
-        decoration: InputDecoration(
-            prefixIcon: Icon(
-              icon,
-              color: Colors.blue,
-            ),
-            border: InputBorder.none,
-            hintText: title,
-            hintStyle: GoogleFonts.quicksand(color: Colors.grey, fontSize: 20)),
-      ),
+    return const SizedBox(
+      height: 28,
+    );
+  }
+}
+
+class SizedBoxH32 extends StatelessWidget {
+  const SizedBoxH32({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      height: 32,
     );
   }
 }

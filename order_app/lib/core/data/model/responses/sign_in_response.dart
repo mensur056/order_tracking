@@ -1,40 +1,27 @@
 class SignInResponse {
-  String? localId;
-  String? email;
-  String? displayName;
   String? idToken;
-  bool? registered;
+  String? email;
   String? refreshToken;
   String? expiresIn;
+  String? localId;
 
-  SignInResponse(
-      {this.localId,
-      this.email,
-      this.displayName,
-      this.idToken,
-      this.registered,
-      this.refreshToken,
-      this.expiresIn});
+  SignInResponse({this.idToken, this.email, this.refreshToken, this.expiresIn, this.localId});
 
   SignInResponse.fromJson(Map<String, dynamic> json) {
-    localId = json['localId'];
-    email = json['email'];
-    displayName = json['displayName'];
     idToken = json['idToken'];
-    registered = json['registered'];
+    email = json['email'];
     refreshToken = json['refreshToken'];
     expiresIn = json['expiresIn'];
+    localId = json['localId'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['localId'] = localId;
-    data['email'] = email;
-    data['displayName'] = displayName;
     data['idToken'] = idToken;
-    data['registered'] = registered;
+    data['email'] = email;
     data['refreshToken'] = refreshToken;
     data['expiresIn'] = expiresIn;
+    data['localId'] = localId;
     return data;
   }
 }

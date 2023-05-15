@@ -1,27 +1,40 @@
 class SignUpResponse {
-  String? idToken;
+  String? localId;
   String? email;
+  String? displayName;
+  String? idToken;
+  bool? registered;
   String? refreshToken;
   String? expiresIn;
-  String? localId;
 
-  SignUpResponse({this.idToken, this.email, this.refreshToken, this.expiresIn, this.localId});
+  SignUpResponse(
+      {this.localId,
+      this.email,
+      this.displayName,
+      this.idToken,
+      this.registered,
+      this.refreshToken,
+      this.expiresIn});
 
   SignUpResponse.fromJson(Map<String, dynamic> json) {
-    idToken = json['idToken'];
+    localId = json['localId'];
     email = json['email'];
+    displayName = json['displayName'];
+    idToken = json['idToken'];
+    registered = json['registered'];
     refreshToken = json['refreshToken'];
     expiresIn = json['expiresIn'];
-    localId = json['localId'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['idToken'] = idToken;
+    data['localId'] = localId;
     data['email'] = email;
+    data['displayName'] = displayName;
+    data['idToken'] = idToken;
+    data['registered'] = registered;
     data['refreshToken'] = refreshToken;
     data['expiresIn'] = expiresIn;
-    data['localId'] = localId;
     return data;
   }
 }
