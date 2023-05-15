@@ -11,10 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider<IAuthRepository>(create: (context) => ImplAuthRepository(),
-      child: MultiBlocProvider(providers: [ BlocProvider<SignInCubit>(
-        create: (context) => SignInCubit(context.read<IAuthRepository>()),
-      ),],
+    return RepositoryProvider<IAuthRepository>(
+      create: (context) => ImplAuthRepository(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<SignInCubit>(
+            create: (context) => SignInCubit(context.read<IAuthRepository>()),
+          ),
+        ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Order Tracking',
