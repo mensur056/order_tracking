@@ -6,8 +6,10 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.onTap,
+    required this.title,
   });
   final VoidCallback onTap;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -23,7 +25,7 @@ class CustomButton extends StatelessWidget {
           padding: const EdgeInsets.all(12.0),
           child: Center(
             child: Text(
-              'Log In',
+              title,
               style: GoogleFonts.quicksand(color: Colors.white, fontSize: 28),
             ),
           ),

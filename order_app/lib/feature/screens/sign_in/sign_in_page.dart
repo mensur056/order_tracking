@@ -61,6 +61,7 @@ class SignInPage extends StatelessWidget {
                         ),
                         const SizedBoxH28(),
                         CustomButton(
+                          title: 'Log In',
                           onTap: () {
                             context
                                 .read<SignInCubit>()
