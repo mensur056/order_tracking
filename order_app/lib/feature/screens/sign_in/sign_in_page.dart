@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kartal/kartal.dart';
 import 'package:order_app/core/bloc/sign_in/sign_in_cubit.dart';
 import 'package:order_app/core/bloc/sign_in/sign_in_state.dart';
-import 'package:order_app/feature/screens/home/home_page.dart';
+import 'package:order_app/feature/dialogs/custom_snack_bar.dart';
 
 import '../../global/custom_button.dart';
 import '../../global/custom_text_field.dart';
@@ -21,10 +20,9 @@ class SignInPage extends StatelessWidget {
       body: BlocConsumer<SignInCubit, SignInState>(
         listener: (context, state) {
           if (state is SignInFailure) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text("There is a error")));
+            AppSnackBar().customSnackBar(context, 'Error', Colors.red);
           } else if (state is SignInSuccess) {
-            context.navigateToPage(const HomePage());
+            AppSnackBar().customSnackBar(context, 'Success', Colors.green);
           }
         },
         buildWhen: (_, current) => current is! SignInSuccess,
