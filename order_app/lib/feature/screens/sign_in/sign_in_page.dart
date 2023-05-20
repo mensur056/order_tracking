@@ -5,6 +5,7 @@ import 'package:order_app/core/bloc/sign_in/sign_in_cubit.dart';
 import 'package:order_app/core/bloc/sign_in/sign_in_state.dart';
 import 'package:order_app/feature/dialogs/custom_snack_bar.dart';
 
+import '../../../utility/constants/sized_boxs.dart';
 import '../../global/custom_button.dart';
 import '../../global/custom_text_field.dart';
 
@@ -17,129 +18,68 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF36383D),
-      body: BlocConsumer<SignInCubit, SignInState>(
-        listener: (context, state) {
-          if (state is SignInFailure) {
-            AppSnackBar().customSnackBar(context, 'Error', Colors.red);
-          } else if (state is SignInSuccess) {
-            AppSnackBar().customSnackBar(context, 'Success', Colors.green);
-          }
-        },
-        buildWhen: (_, current) => current is! SignInSuccess,
-        listenWhen: (_, current) => current is SignInFailure || current is SignInSuccess,
-        builder: (context, state) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 100),
-              child: Form(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const _SignInLogo(),
-                        const SizedBoxH28(),
-                        Text(
-                          "Log In",
-                          style: GoogleFonts.quicksand(color: Colors.white, fontSize: 32),
-                        ),
-                        const SizedBoxH28(),
-                        CustomTextField(
-                          controller: emailController,
-                          icon: Icons.person_2_outlined,
-                          title: 'Enter your email adresss',
-                        ),
-                        const SizedBoxH20(),
-                        CustomTextField(
-                          controller: passwordController,
-                          icon: Icons.key,
-                          title: 'Enter your password',
-                        ),
-                        const SizedBoxH28(),
-                        CustomButton(
-                          title: 'Log In',
-                          onTap: () {
-                            context
-                                .read<SignInCubit>()
-                                .signInUser(emailController.text, passwordController.text);
-                          },
-                        )
-                      ],
-                    ),
+      body: _body(),
+    );
+  }
+
+  BlocConsumer<SignInCubit, SignInState> _body() {
+    return BlocConsumer<SignInCubit, SignInState>(
+      listener: (context, state) {
+        if (state is SignInFailure) {
+          AppSnackBar().customSnackBar(context, 'Error', Colors.red);
+        } else if (state is SignInSuccess) {
+          AppSnackBar().customSnackBar(context, 'Success', Colors.green);
+        }
+      },
+      buildWhen: (_, current) => current is! SignInSuccess,
+      listenWhen: (_, current) => current is SignInFailure || current is SignInSuccess,
+      builder: (context, state) {
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 100),
+            child: Form(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const _SignInLogo(),
+                      const SizedBoxH28(),
+                      Text(
+                        "Log In",
+                        style: GoogleFonts.quicksand(color: Colors.white, fontSize: 32),
+                      ),
+                      const SizedBoxH28(),
+                      CustomTextField(
+                        controller: emailController,
+                        icon: Icons.person_2_outlined,
+                        title: 'Enter your email adresss',
+                      ),
+                      const SizedBoxH20(),
+                      CustomTextField(
+                        controller: passwordController,
+                        icon: Icons.key,
+                        title: 'Enter your password',
+                      ),
+                      const SizedBoxH28(),
+                      CustomButton(
+                        title: 'Log In',
+                        onTap: () {
+                          context
+                              .read<SignInCubit>()
+                              .signInUser(emailController.text, passwordController.text);
+                        },
+                      )
+                    ],
                   ),
                 ),
               ),
             ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class SizedBoxH16 extends StatelessWidget {
-  const SizedBoxH16({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 16,
-    );
-  }
-}
-
-class SizedBoxH20 extends StatelessWidget {
-  const SizedBoxH20({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 20,
-    );
-  }
-}
-
-class SizedBoxH24 extends StatelessWidget {
-  const SizedBoxH24({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 24,
-    );
-  }
-}
-
-class SizedBoxH28 extends StatelessWidget {
-  const SizedBoxH28({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 28,
-    );
-  }
-}
-
-class SizedBoxH32 extends StatelessWidget {
-  const SizedBoxH32({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 32,
+          ),
+        );
+      },
     );
   }
 }

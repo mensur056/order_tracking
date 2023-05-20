@@ -17,6 +17,7 @@ class CustomTextField extends StatelessWidget {
       decoration:
           BoxDecoration(borderRadius: BorderRadius.circular(20), color: const Color(0xFF3C3E42)),
       child: TextFormField(
+        style: GoogleFonts.quicksand(color: Colors.grey, fontSize: 20),
         controller: controller,
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(16),
