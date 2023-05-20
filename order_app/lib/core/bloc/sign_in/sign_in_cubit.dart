@@ -9,14 +9,13 @@ class SignInCubit extends Cubit<SignInState> {
   ) : super(SignInInitial());
 
   final IAuthRepository _authRepository;
-  bool isObscure = false;
+  bool isObscure = true;
   Future<void> signInUser(String email, String password) async {
     emit(SignInInProgress());
     final result = await _authRepository.signIn(email, password);
     if (result.isSuccess()) {
       emit(SignInSuccess());
     } else if (result.isError()) {
-      print('sdfsdf');
       emit(SignInFailure());
     }
   }
@@ -24,6 +23,5 @@ class SignInCubit extends Cubit<SignInState> {
   void changeVisibleIcon() {
     isObscure = !isObscure;
     emit(SignInIcon(isObscure: isObscure));
-    print(isObscure);
   }
 }

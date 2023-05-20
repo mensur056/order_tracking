@@ -9,18 +9,21 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     this.suffixIcon,
     this.obscure,
+    required this.inputAction,
   });
   final String title;
   final IconData icon;
   final TextEditingController controller;
   final Widget? suffixIcon;
   final bool? obscure;
+  final TextInputAction inputAction;
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration:
           BoxDecoration(borderRadius: BorderRadius.circular(20), color: const Color(0xFF3C3E42)),
       child: TextFormField(
+        textInputAction: inputAction,
         obscureText: obscure ?? false,
         style: GoogleFonts.quicksand(color: Colors.grey, fontSize: 20),
         controller: controller,

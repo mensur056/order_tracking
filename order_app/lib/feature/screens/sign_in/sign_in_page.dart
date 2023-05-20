@@ -53,19 +53,24 @@ class SignInPage extends StatelessWidget {
                       ),
                       const SizedBoxH28(),
                       CustomTextField(
+                        inputAction: TextInputAction.next,
                         controller: emailController,
                         icon: Icons.person_2_outlined,
                         title: 'Enter your email adresss',
                       ),
                       const SizedBoxH20(),
                       CustomTextField(
-                        obscure: context.read<SignInCubit>().isObscure,
-                        suffixIcon: IconButton(
-                            onPressed: () {
+                        inputAction: TextInputAction.done,
+                        obscure: context.watch<SignInCubit>().isObscure,
+                        suffixIcon: InkWell(
+                            splashColor: Colors.transparent,
+                            onTap: () {
                               context.read<SignInCubit>().changeVisibleIcon();
                             },
-                            icon: const Icon(
-                              Icons.visibility,
+                            child: Icon(
+                              context.watch<SignInCubit>().isObscure
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                               color: Colors.grey,
                             )),
                         controller: passwordController,
