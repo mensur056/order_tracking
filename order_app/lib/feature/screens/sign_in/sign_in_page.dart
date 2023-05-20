@@ -59,6 +59,15 @@ class SignInPage extends StatelessWidget {
                       ),
                       const SizedBoxH20(),
                       CustomTextField(
+                        obscure: context.read<SignInCubit>().isObscure,
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              context.read<SignInCubit>().changeVisibleIcon();
+                            },
+                            icon: const Icon(
+                              Icons.visibility,
+                              color: Colors.grey,
+                            )),
                         controller: passwordController,
                         icon: Icons.key,
                         title: 'Enter your password',

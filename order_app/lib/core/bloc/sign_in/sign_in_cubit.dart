@@ -4,10 +4,12 @@ import 'package:order_app/core/data/contractors/i_auth_repository.dart';
 import 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
-  SignInCubit(this._authRepository) : super(SignInInitial());
+  SignInCubit(
+    this._authRepository,
+  ) : super(SignInInitial());
 
   final IAuthRepository _authRepository;
-
+  bool isObscure = false;
   Future<void> signInUser(String email, String password) async {
     emit(SignInInProgress());
     final result = await _authRepository.signIn(email, password);
@@ -17,5 +19,11 @@ class SignInCubit extends Cubit<SignInState> {
       print('sdfsdf');
       emit(SignInFailure());
     }
+  }
+
+  void changeVisibleIcon() {
+    isObscure = !isObscure;
+    emit(SignInIcon(isObscure: isObscure));
+    print(isObscure);
   }
 }
