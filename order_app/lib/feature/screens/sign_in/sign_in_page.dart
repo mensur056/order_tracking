@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kartal/kartal.dart';
 import 'package:order_app/core/bloc/sign_in/sign_in_cubit.dart';
 import 'package:order_app/core/bloc/sign_in/sign_in_state.dart';
 import 'package:order_app/feature/dialogs/custom_snack_bar.dart';
-
+import 'package:order_app/feature/screens/home/home_page.dart';
 import '../../../utility/constants/sized_boxs.dart';
 import '../../global/custom_button.dart';
 import '../../global/custom_text_field.dart';
@@ -29,6 +30,7 @@ class SignInPage extends StatelessWidget {
           AppSnackBar().customSnackBar(context, 'Error', Colors.red);
         } else if (state is SignInSuccess) {
           AppSnackBar().customSnackBar(context, 'Success', Colors.green);
+          context.navigateToPage(const HomePage());
         }
       },
       buildWhen: (_, current) => current is! SignInSuccess,

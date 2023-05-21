@@ -7,4 +7,5 @@ import '../../../feature/global/auth_failure.dart';
 abstract class IAuthRepository {
   Future<Result<SignInResponse, AuthFailure>> signIn(String email, String password);
   Future<Result<SignUpResponse, AuthFailure>> signUp(String email, String password);
+  Future<Result<bool, AuthFailure>> checkAuth();
 }
