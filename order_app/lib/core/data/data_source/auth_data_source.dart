@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:order_app/core/data/model/requests/user_model.dart';
 import 'package:order_app/core/data/model/responses/sign_in_response.dart';
 import 'package:order_app/core/data/model/responses/sign_up_response.dart';
 import 'package:order_app/keys.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthDataSource {
   final Dio _dio = Dio()
@@ -36,7 +36,8 @@ class AuthDataSource {
   }
 
   Future<bool?> isAuthenticated() async {
-    final sharedPrefs = await SharedPreferences.getInstance();
-    return sharedPrefs.getBool("logged");
+    final getStorage = GetStorage();
+    bool result = await getStorage.read('logged');
+    return result;
   }
 }

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           BlocProvider<SignInCubit>(
             create: (context) => SignInCubit(context.read<IAuthRepository>()),
           ),
-          BlocProvider(
+          BlocProvider<AuthCubit>(
             create: (context) => AuthCubit(context.read<IAuthRepository>())..checkAuth(),
           )
         ],
