@@ -23,14 +23,19 @@ class HomePage extends StatelessWidget {
                   borderRadius: context.roundedRectangleBorderMedium.borderRadius),
               child: Padding(
                 padding: context.paddingMedium,
-                child: const Column(
+                child: Column(
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Last projects'),
                         Text('All Projects'),
                       ],
+                    ),
+                    ListView.builder(
+                      itemBuilder: (context, index) {
+                        return const Card(child: ListTile());
+                      },
                     ),
                   ],
                 ),
