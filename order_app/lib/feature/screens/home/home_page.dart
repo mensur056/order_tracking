@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
+import 'package:order_app/utility/constants/color.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,12 +8,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF36383D),
+      backgroundColor: AppColors.backColor,
       body: Column(
         children: [
           Expanded(
             flex: 1,
-            child: Container(color: const Color(0xFF36383D)),
+            child: Container(color: AppColors.backColor),
           ),
           Expanded(
             flex: 3,
