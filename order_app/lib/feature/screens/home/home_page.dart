@@ -7,22 +7,37 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFF36383D),
-        body: Column(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Container(color: const Color(0xFF36383D)),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: context.roundedRectangleBorderMedium.borderRadius),
+      backgroundColor: const Color(0xFF36383D),
+      body: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Container(color: const Color(0xFF36383D)),
+          ),
+          Expanded(
+            flex: 3,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: context.roundedRectangleBorderMedium.borderRadius),
+              child: Padding(
+                padding: context.paddingMedium,
+                child: const Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Last projects'),
+                        Text('All Projects'),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }
