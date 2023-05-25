@@ -28,11 +28,12 @@ class SignInPage extends StatelessWidget {
 
   BlocConsumer<SignInCubit, SignInState> _body() {
     return BlocConsumer<SignInCubit, SignInState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is SignInFailure) {
           AppSnackBar().customSnackBar(context, 'Error', Colors.red);
         } else if (state is SignInSuccess) {
           AppSnackBar().customSnackBar(context, 'Success', Colors.green);
+          await Future.delayed(const Duration(seconds: 2));
           context.navigateToPage(BlocProvider(
             create: (context) => HomeCubit(context.read<IHomeRepository>()),
             child: const HomePage(),
