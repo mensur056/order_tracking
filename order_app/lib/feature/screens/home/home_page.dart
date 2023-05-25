@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 import 'package:order_app/utility/constants/color.dart';
-import 'package:order_app/utility/constants/sized_boxs.dart';
 
 import '../../../core/bloc/home/home_cubit.dart';
 import '../../../core/bloc/home/home_state.dart';
@@ -45,7 +44,6 @@ class HomePage extends StatelessWidget {
                               Text('All Projects'),
                             ],
                           ),
-                          const SizedBoxH24(),
                           SizedBox(
                             height: context.dynamicHeight(0.6),
                             child: ListView.builder(
@@ -53,6 +51,8 @@ class HomePage extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return Card(
                                     child: ListTile(
+                                        leading: Image.network(
+                                            projectValue?[index].image.toString() ?? ''),
                                         title: Text(projectValue?[index].title.toString() ?? '')));
                               },
                             ),
