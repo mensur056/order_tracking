@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:order_app/utility/constants/color.dart';
+import 'package:order_app/utility/constants/sized_boxs.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -32,10 +33,14 @@ class HomePage extends StatelessWidget {
                         Text('All Projects'),
                       ],
                     ),
-                    ListView.builder(
-                      itemBuilder: (context, index) {
-                        return const Card(child: ListTile());
-                      },
+                    const SizedBoxH24(),
+                    SizedBox(
+                      height: context.dynamicHeight(0.6),
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return const Card(child: ListTile());
+                        },
+                      ),
                     ),
                   ],
                 ),

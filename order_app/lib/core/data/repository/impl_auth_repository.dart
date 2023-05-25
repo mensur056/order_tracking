@@ -5,7 +5,7 @@ import 'package:order_app/core/data/model/responses/sign_in_response.dart';
 import 'package:order_app/core/data/model/responses/sign_up_response.dart';
 import 'package:order_app/core/locator/locator.dart';
 
-import 'package:order_app/feature/global/auth_failure.dart';
+import 'package:order_app/feature/global/failure/auth_failure.dart';
 
 import '../contractors/i_auth_repository.dart';
 
