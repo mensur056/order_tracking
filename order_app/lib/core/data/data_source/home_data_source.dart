@@ -3,7 +3,7 @@ import 'package:order_app/core/data/model/responses/project_model.dart';
 import 'package:order_app/utility/constants/firebase/firebase_collections.dart';
 
 class HomeDataSource {
-  Future<List<ProjectModel>?> fetcProject() async {
+  Future<List<ProjectModel>?> fetchAllProject() async {
     CollectionReference project = FirebaseCollection.projects.referance;
     final response = await project.withConverter(
       fromFirestore: (snapshot, options) {
@@ -13,10 +13,12 @@ class HomeDataSource {
         return value.toJson();
       },
     ).get();
+
     if (response.docs.isNotEmpty) {
       final values = response.docs.map((e) => e.data()).toList();
       return values;
     }
+    print('sdfs');
     return null;
   }
 }

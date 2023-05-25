@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:kartal/kartal.dart';
 import 'package:order_app/core/bloc/sign_in/sign_in_cubit.dart';
 import 'package:order_app/core/bloc/sign_in/sign_in_state.dart';
+import 'package:order_app/core/data/contractors/i_home_repository.dart';
 import 'package:order_app/feature/dialogs/custom_snack_bar.dart';
 import 'package:order_app/feature/screens/home/home_page.dart';
+import '../../../core/bloc/home/home_cubit.dart';
 import '../../../utility/constants/color.dart';
 import '../../../utility/constants/sized_boxs.dart';
 import '../../global/custom_button.dart';
@@ -31,7 +33,10 @@ class SignInPage extends StatelessWidget {
           AppSnackBar().customSnackBar(context, 'Error', Colors.red);
         } else if (state is SignInSuccess) {
           AppSnackBar().customSnackBar(context, 'Success', Colors.green);
-          context.navigateToPage(const HomePage());
+          context.navigateToPage(BlocProvider(
+            create: (context) => HomeCubit(context.read<IHomeRepository>()),
+            child: const HomePage(),
+          ));
         }
       },
       buildWhen: (_, current) => current is! SignInSuccess,

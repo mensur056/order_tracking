@@ -9,11 +9,12 @@ class ImplHomeRepository implements IHomeRepository {
   final homeDataSource = getIt.get<HomeDataSource>();
 
   @override
-  Future<Result<List<ProjectModel>, HomeFailureDialog>> fetcProjects() async {
+  Future<Result<List<ProjectModel>, HomeFailureDialog>> fetchProjects() async {
     try {
-      final result = await homeDataSource.fetcProject();
+      final result = await homeDataSource.fetchAllProject();
       return Success(result!);
     } catch (e) {
+      print('dgrgf');
       return Error(HomeFailureDialog());
     }
   }

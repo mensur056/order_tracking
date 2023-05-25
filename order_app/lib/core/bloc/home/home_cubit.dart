@@ -10,11 +10,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> fetchProjects() async {
     emit(HomeInProgress());
-    final result = await _homeRepository.fetcProjects();
+    final result = await _homeRepository.fetchProjects();
     if (result.isSuccess()) {
       final homeProjectsResult = result.tryGetSuccess();
       emit(HomeSucces(items: homeProjectsResult));
     } else if (result.isError()) {
+      print('sgs');
       emit(HomeFailure());
     }
   }
