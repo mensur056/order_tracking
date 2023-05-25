@@ -49,11 +49,20 @@ class HomePage extends StatelessWidget {
                             child: ListView.builder(
                               itemCount: projectValue?.length,
                               itemBuilder: (context, index) {
-                                return Card(
-                                    child: ListTile(
-                                        leading: Image.network(
-                                            projectValue?[index].image.toString() ?? ''),
-                                        title: Text(projectValue?[index].title.toString() ?? '')));
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.black),
+                                          borderRadius:
+                                              const BorderRadius.all(Radius.circular(16))),
+                                      child: ListTile(
+                                          trailing: const Icon(Icons.navigate_next_outlined),
+                                          subtitle: Text(projectValue?[index].subtitle ?? ''),
+                                          leading: Image.network(
+                                              projectValue?[index].image.toString() ?? ''),
+                                          title: Text(projectValue?[index].title ?? ''))),
+                                );
                               },
                             ),
                           ),
