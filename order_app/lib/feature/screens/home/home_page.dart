@@ -61,8 +61,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: context.dynamicHeight(0.6),
+                        Expanded(
                           child: ListView.builder(
                             itemCount: projectValue?.length,
                             itemBuilder: (context, index) {
