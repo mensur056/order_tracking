@@ -26,11 +26,32 @@ class HomePage extends StatelessWidget {
           );
         } else if (state is HomeSucces) {
           final projectValue = state.items;
+          final lastProjectValue = state.lastItems;
+
           return Column(
             children: [
               Expanded(
                 flex: 1,
-                child: Container(color: AppColors.backColor),
+                child: Container(
+                    color: AppColors.backColor,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: lastProjectValue?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          color: Colors.red,
+                          child: ListTile(
+                            trailing: const CircularProgressIndicator(
+                                backgroundColor: Colors.white, value: 80),
+                            leading: Image.network(lastProjectValue?[index].image ?? ''),
+                            title: Text(
+                              lastProjectValue?[index].title ?? '',
+                            ),
+                            subtitle: Text(lastProjectValue?[index].time ?? ''),
+                          ),
+                        );
+                      },
+                    )),
               ),
               Expanded(
                 flex: 3,

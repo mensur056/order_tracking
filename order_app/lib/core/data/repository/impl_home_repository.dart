@@ -15,7 +15,6 @@ class ImplHomeRepository implements IHomeRepository {
       final result = await homeDataSource.fetchAllProject();
       return Success(result!);
     } catch (e) {
-      print('dgrgf');
       return Error(HomeFailureDialog());
     }
   }
