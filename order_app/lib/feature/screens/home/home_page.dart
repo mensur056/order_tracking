@@ -28,87 +28,96 @@ class HomePage extends StatelessWidget {
           final projectValue = state.items;
           final lastProjectValue = state.lastItems;
 
-          return Column(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(
+          return SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Container(
                     color: AppColors.backColor,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: lastProjectValue?.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          color: Colors.red,
-                          child: ListTile(
-                            trailing: const CircularProgressIndicator(
-                                backgroundColor: Colors.white, value: 80),
-                            leading: Image.network(lastProjectValue?[index].image ?? ''),
-                            title: Text(
-                              lastProjectValue?[index].title ?? '',
+                        return Padding(
+                          padding: const EdgeInsets.all(40.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.red, borderRadius: context.normalBorderRadius),
+                            width: context.dynamicWidth(0.8),
+                            child: ListTile(
+                              trailing: const CircularProgressIndicator(
+                                  backgroundColor: Colors.white, value: 80),
+                              leading: Image.network(lastProjectValue?[index].image ?? ''),
+                              title: Text(
+                                lastProjectValue?[index].title ?? '',
+                              ),
+                              subtitle: Text(lastProjectValue?[index].time ?? ''),
                             ),
-                            subtitle: Text(lastProjectValue?[index].time ?? ''),
                           ),
                         );
                       },
-                    )),
-              ),
-              Expanded(
-                flex: 3,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: context.roundedRectangleBorderMedium.borderRadius),
-                  child: Padding(
-                    padding: context.paddingMedium,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Last projects',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'All Projects',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelLarge
-                                  ?.copyWith(color: Colors.red),
-                            ),
-                          ],
-                        ),
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: projectValue?.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.black),
-                                        borderRadius: const BorderRadius.all(Radius.circular(16))),
-                                    child: ListTile(
-                                        onTap: () {},
-                                        trailing: const Icon(Icons.navigate_next_outlined),
-                                        subtitle: Text(projectValue?[index].subtitle ?? ''),
-                                        leading: Image.network(
-                                            projectValue?[index].image.toString() ?? ''),
-                                        title: Text(projectValue?[index].title ?? ''))),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                 ),
-              ),
-            ],
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: context.roundedRectangleBorderMedium.borderRadius),
+                    child: Padding(
+                      padding: context.paddingMedium,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Last projects',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge
+                                    ?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'All Projects',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(color: Colors.red),
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: projectValue?.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.black),
+                                          borderRadius:
+                                              const BorderRadius.all(Radius.circular(16))),
+                                      child: ListTile(
+                                          onTap: () {},
+                                          trailing: const Icon(Icons.navigate_next_outlined),
+                                          subtitle: Text(projectValue?[index].subtitle ?? ''),
+                                          leading: Image.network(
+                                              projectValue?[index].image.toString() ?? ''),
+                                          title: Text(projectValue?[index].title ?? ''))),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         } else {
           return const Center(
