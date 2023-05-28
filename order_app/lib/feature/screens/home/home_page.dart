@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kartal/kartal.dart';
 import 'package:order_app/utility/constants/color.dart';
 import 'package:order_app/utility/constants/sized_boxs.dart';
@@ -42,7 +43,7 @@ class HomePage extends StatelessWidget {
                         itemCount: lastProjectValue?.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
-                            padding: const EdgeInsets.all(40.0),
+                            padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 20),
                             child: Container(
                               decoration: BoxDecoration(
                                   gradient: LinearGradient(colors: [
@@ -59,8 +60,15 @@ class HomePage extends StatelessWidget {
                                     Image.network(lastProjectValue?[index].image ?? '', width: 40),
                                 title: Text(
                                   lastProjectValue?[index].title ?? '',
+                                  style: GoogleFonts.quicksand(
+                                      color: Colors.white, fontWeight: FontWeight.w800),
                                 ),
-                                subtitle: Text(lastProjectValue?[index].time ?? ''),
+                                subtitle: Text(
+                                  lastProjectValue?[index].time ?? '',
+                                  style: GoogleFonts.quicksand(
+                                    color: Colors.grey.shade300,
+                                  ),
+                                ),
                               ),
                             ),
                           );
