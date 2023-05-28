@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:order_app/core/data/model/requests/user_model.dart';
-import 'package:order_app/core/data/model/responses/sign_in_response.dart';
-import 'package:order_app/core/data/model/responses/sign_up_response.dart';
+import 'package:order_app/core/data/model/responses/auth/sign_in_response.dart';
+import 'package:order_app/core/data/model/responses/auth/sign_up_response.dart';
 import 'package:order_app/keys.dart';
 
 class AuthDataSource {

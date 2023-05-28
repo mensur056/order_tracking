@@ -1,8 +1,8 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:order_app/core/data/data_source/auth_data_source.dart';
-import 'package:order_app/core/data/model/responses/sign_in_response.dart';
-import 'package:order_app/core/data/model/responses/sign_up_response.dart';
+import 'package:order_app/core/data/model/responses/auth/sign_in_response.dart';
+import 'package:order_app/core/data/model/responses/auth/sign_up_response.dart';
 import 'package:order_app/core/locator/locator.dart';
 
 import 'package:order_app/feature/global/failure/auth_failure.dart';

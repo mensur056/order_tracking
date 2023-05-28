@@ -1,4 +1,4 @@
-import 'package:order_app/core/data/model/responses/project_model.dart';
+import 'package:order_app/core/data/model/responses/home/project_model.dart';
 
 abstract class HomeState {}
 

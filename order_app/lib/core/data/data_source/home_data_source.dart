@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:order_app/core/data/model/responses/project_model.dart';
+import 'package:order_app/core/data/model/responses/home/last_project_model.dart';
+import 'package:order_app/core/data/model/responses/home/project_model.dart';
 import 'package:order_app/utility/constants/firebase/firebase_collections.dart';
 
 class HomeDataSource {
@@ -18,7 +19,23 @@ class HomeDataSource {
       final values = response.docs.map((e) => e.data()).toList();
       return values;
     }
-    print('sdfs');
+    return null;
+  }
+
+  Future<List<LastProjectModel>?> fetchAllLastProject() async {
+    CollectionReference lastProject = FirebaseCollection.lastProjects.referance;
+    final response = await lastProject.withConverter(
+      fromFirestore: (snapshot, options) {
+        return LastProjectModel.fromJson(snapshot.data()!);
+      },
+      toFirestore: (value, options) {
+        return value.toJson();
+      },
+    ).get();
+    if (response.docs.isNotEmpty) {
+      final values = response.docs.map((e) => e.data()).toList();
+      return values;
+    }
     return null;
   }
 }
