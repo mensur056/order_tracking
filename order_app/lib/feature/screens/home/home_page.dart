@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 import 'package:order_app/utility/constants/color.dart';
+import 'package:order_app/utility/constants/sized_boxs.dart';
 
 import '../../../core/bloc/home/home_cubit.dart';
 import '../../../core/bloc/home/home_state.dart';
@@ -33,30 +34,38 @@ class HomePage extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 1,
-                  child: Container(
-                    color: AppColors.backColor,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: lastProjectValue?.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(40.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.red, borderRadius: context.normalBorderRadius),
-                            width: context.dynamicWidth(0.8),
-                            child: ListTile(
-                              trailing: const CircularProgressIndicator(
-                                  backgroundColor: Colors.white, value: 80),
-                              leading: Image.network(lastProjectValue?[index].image ?? ''),
-                              title: Text(
-                                lastProjectValue?[index].title ?? '',
+                  child: Card(
+                    child: Container(
+                      color: AppColors.backColor,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: lastProjectValue?.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(40.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(colors: [
+                                    Colors.red,
+                                    Colors.red.shade400,
+                                    Colors.red.shade300,
+                                  ]),
+                                  borderRadius: context.normalBorderRadius),
+                              width: context.dynamicWidth(0.8),
+                              child: ListTile(
+                                trailing: const CircularProgressIndicator(
+                                    backgroundColor: Colors.white, value: 80),
+                                leading:
+                                    Image.network(lastProjectValue?[index].image ?? '', width: 40),
+                                title: Text(
+                                  lastProjectValue?[index].title ?? '',
+                                ),
+                                subtitle: Text(lastProjectValue?[index].time ?? ''),
                               ),
-                              subtitle: Text(lastProjectValue?[index].time ?? ''),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -89,6 +98,7 @@ class HomePage extends StatelessWidget {
                               ),
                             ],
                           ),
+                          const SizedBoxH16(),
                           Expanded(
                             child: ListView.builder(
                               itemCount: projectValue?.length,
