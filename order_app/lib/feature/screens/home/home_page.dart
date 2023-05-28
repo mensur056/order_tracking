@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                               width: context.dynamicWidth(0.8),
                               child: ListTile(
                                 trailing: const CircularProgressIndicator(
-                                    backgroundColor: Colors.white, value: 80),
+                                    color: Colors.white, backgroundColor: Colors.white, value: 0.5),
                                 leading:
                                     Image.network(lastProjectValue?[index].image ?? '', width: 40),
                                 title: Text(
@@ -85,51 +85,107 @@ class HomePage extends StatelessWidget {
                         borderRadius: context.roundedRectangleBorderMedium.borderRadius),
                     child: Padding(
                       padding: context.paddingMedium,
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Last projects',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'All Projects',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelLarge
-                                    ?.copyWith(color: Colors.red),
-                              ),
-                            ],
-                          ),
-                          const SizedBoxH16(),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: projectValue?.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 16),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.black),
-                                          borderRadius:
-                                              const BorderRadius.all(Radius.circular(16))),
-                                      child: ListTile(
-                                          onTap: () {},
-                                          trailing: const Icon(Icons.navigate_next_outlined),
-                                          subtitle: Text(projectValue?[index].subtitle ?? ''),
-                                          leading: Image.network(
-                                              projectValue?[index].image.toString() ?? ''),
-                                          title: Text(projectValue?[index].title ?? ''))),
-                                );
-                              },
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Last projects',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  'All Projects',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelLarge
+                                      ?.copyWith(color: Colors.red),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                            const SizedBoxH16(),
+                            SizedBox(
+                              height: 280,
+                              child: ListView.builder(
+                                itemCount: projectValue!.length - 5,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 16),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(color: Colors.black),
+                                                borderRadius:
+                                                    const BorderRadius.all(Radius.circular(16))),
+                                            child: ListTile(
+                                                onTap: () {},
+                                                trailing: const Icon(Icons.navigate_next_outlined),
+                                                subtitle: Text(projectValue[index].subtitle ?? ''),
+                                                leading: Image.network(
+                                                    width: 40,
+                                                    projectValue[index].image.toString()),
+                                                title: Text(projectValue[index].title ?? ''))),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Last Orders',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  'All Orders',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelLarge
+                                      ?.copyWith(color: Colors.red),
+                                ),
+                              ],
+                            ),
+                            const SizedBoxH16(),
+                            SizedBox(
+                              height: 300,
+                              child: ListView.builder(
+                                itemCount: projectValue.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 16),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(color: Colors.black),
+                                                borderRadius:
+                                                    const BorderRadius.all(Radius.circular(16))),
+                                            child: ListTile(
+                                                onTap: () {},
+                                                trailing: const Icon(Icons.navigate_next_outlined),
+                                                subtitle: Text(projectValue[index].subtitle ?? ''),
+                                                leading: Image.network(
+                                                    width: 40,
+                                                    projectValue[index].image.toString()),
+                                                title: Text(projectValue[index].title ?? ''))),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

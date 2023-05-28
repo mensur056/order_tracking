@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:order_app/core/data/model/responses/detail/order_model.dart';
 import 'package:order_app/core/data/model/responses/home/last_project_model.dart';
 import 'package:order_app/core/data/model/responses/home/project_model.dart';
 import 'package:order_app/utility/constants/firebase/firebase_collections.dart';
@@ -36,6 +37,25 @@ class HomeDataSource {
       final values = response.docs.map((e) => e.data()).toList();
       return values;
     }
+    return null;
+  }
+
+  Future<List<OrderModel>?> fetchAllOrder() async {
+    CollectionReference orders = FirebaseCollection.orders.referance;
+
+    final response = await orders.withConverter(
+      fromFirestore: (snapshot, options) {
+        return OrderModel.fromJson(snapshot.data()!);
+      },
+      toFirestore: (value, options) {
+        return value.toJson();
+      },
+    ).get();
+    if (response.docs.isNotEmpty) {
+      final values = response.docs.map((e) => e.data()).toList();
+      return values;
+    }
+
     return null;
   }
 }
