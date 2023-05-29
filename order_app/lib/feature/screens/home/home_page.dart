@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kartal/kartal.dart';
+import 'package:order_app/core/bloc/detail/detail_cubit.dart';
+import 'package:order_app/feature/screens/home/order_detail_page.dart';
+import 'package:order_app/feature/screens/home/quiz_detail_page.dart';
 import 'package:order_app/utility/constants/color.dart';
 import 'package:order_app/utility/constants/sized_boxs.dart';
 
@@ -98,12 +101,17 @@ class HomePage extends StatelessWidget {
                                       .bodyLarge
                                       ?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
                                 ),
-                                Text(
-                                  'All Projects',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelLarge
-                                      ?.copyWith(color: Colors.red),
+                                InkWell(
+                                  onTap: () {
+                                    context.navigateToPage(const QuizDetailPage());
+                                  },
+                                  child: Text(
+                                    'All Projects',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelLarge
+                                        ?.copyWith(color: Colors.red),
+                                  ),
                                 ),
                               ],
                             ),
@@ -146,43 +154,60 @@ class HomePage extends StatelessWidget {
                                       .bodyLarge
                                       ?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
                                 ),
-                                Text(
-                                  'All Orders',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelLarge
-                                      ?.copyWith(color: Colors.red),
+                                InkWell(
+                                  onTap: () {
+                                    context.navigateToPage(const OrderDetailPage());
+                                  },
+                                  child: Text(
+                                    'All Orders',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelLarge
+                                        ?.copyWith(color: Colors.red),
+                                  ),
                                 ),
                               ],
                             ),
                             const SizedBoxH16(),
-                            SizedBox(
-                              height: 300,
-                              child: ListView.builder(
-                                itemCount: projectValue.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(bottom: 16),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                            decoration: BoxDecoration(
-                                                border: Border.all(color: Colors.black),
-                                                borderRadius:
-                                                    const BorderRadius.all(Radius.circular(16))),
-                                            child: ListTile(
-                                                onTap: () {},
-                                                trailing: const Icon(Icons.navigate_next_outlined),
-                                                subtitle: Text(projectValue[index].subtitle ?? ''),
-                                                leading: Image.network(
-                                                    width: 40,
-                                                    projectValue[index].image.toString()),
-                                                title: Text(projectValue[index].title ?? ''))),
-                                      ],
+                            BlocBuilder<DetailOrderCubit, DetailOrderState>(
+                              builder: (context, state) {
+                                if (state is DetailOrderInProgress) {
+                                  return const CircularProgressIndicator();
+                                } else if (state is DetailOrderSuccess) {
+                                  final orderValue = state.items;
+                                  return SizedBox(
+                                    height: 300,
+                                    child: ListView.builder(
+                                      itemCount: orderValue.length - 1,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(bottom: 16),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(color: Colors.black),
+                                                      borderRadius: const BorderRadius.all(
+                                                          Radius.circular(16))),
+                                                  child: ListTile(
+                                                      onTap: () {},
+                                                      trailing:
+                                                          const Icon(Icons.navigate_next_outlined),
+                                                      subtitle: Text(orderValue[index].time ?? ''),
+                                                      leading: Image.network(
+                                                          width: 40,
+                                                          orderValue[index].image.toString()),
+                                                      title: Text(orderValue[index].title ?? ''))),
+                                            ],
+                                          ),
+                                        );
+                                      },
                                     ),
                                   );
-                                },
-                              ),
+                                } else {
+                                  return const Text('There is a Error');
+                                }
+                              },
                             ),
                           ],
                         ),

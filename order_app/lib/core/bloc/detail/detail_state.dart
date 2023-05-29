@@ -1,15 +1,15 @@
 part of 'detail_cubit.dart';
 
-abstract class DetailState {}
+abstract class DetailOrderState {}
 
-class DetailInitial extends DetailState {}
+class DetailOrderInitial extends DetailOrderState {}
 
-class DetailSuccess extends DetailState {
+class DetailOrderSuccess extends DetailOrderState {
   final List<OrderModel> items;
 
-  DetailSuccess({required this.items});
+  DetailOrderSuccess({required this.items});
 }
 
-class DetailFailure extends DetailState {}
+class DetailOrderFailure extends DetailOrderState {}
 
-class DetailInProgress extends DetailState {}
+class DetailOrderInProgress extends DetailOrderState {}

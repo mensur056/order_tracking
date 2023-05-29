@@ -5,18 +5,18 @@ import '../../data/contractors/i_detail_repository.dart';
 
 part 'detail_state.dart';
 
-class DetailCubit extends Cubit<DetailState> {
-  DetailCubit(this._detailRepository) : super(DetailInitial());
+class DetailOrderCubit extends Cubit<DetailOrderState> {
+  DetailOrderCubit(this._detailRepository) : super(DetailOrderInitial());
   final IDetailRepository _detailRepository;
 
   Future<void> fetchOrders() async {
-    emit(DetailInProgress());
+    emit(DetailOrderInProgress());
     final result = await _detailRepository.fetchOrder();
     if (result.isSuccess()) {
       final detailResult = result.tryGetSuccess();
-      emit(DetailSuccess(items: detailResult!));
+      emit(DetailOrderSuccess(items: detailResult!));
     } else if (result.isError()) {
-      emit(DetailFailure());
+      emit(DetailOrderFailure());
     }
   }
 }
