@@ -8,6 +8,7 @@ import 'package:order_app/feature/dialogs/custom_snack_bar.dart';
 import 'package:order_app/feature/screens/home/home_page.dart';
 import '../../../utility/constants/color.dart';
 import '../../../utility/constants/sized_boxs.dart';
+import '../../../utility/constants/strings.dart';
 import '../../global/custom_button.dart';
 import '../../global/custom_text_field.dart';
 
@@ -28,9 +29,9 @@ class SignInPage extends StatelessWidget {
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) async {
         if (state is SignInFailure) {
-          AppSnackBar().customSnackBar(context, 'Error', Colors.red);
+          AppSnackBar().customSnackBar(context, SignInStrings.snackBarError, Colors.red);
         } else if (state is SignInSuccess) {
-          AppSnackBar().customSnackBar(context, 'Success', Colors.green);
+          AppSnackBar().customSnackBar(context, SignInStrings.snackBarSuccess, Colors.green);
           await Future.delayed(
             const Duration(seconds: 2),
             () {
@@ -56,7 +57,7 @@ class SignInPage extends StatelessWidget {
                       const _SignInLogo(),
                       const SizedBoxH28(),
                       Text(
-                        "Log In",
+                        SignInStrings.logInButtonText,
                         style: GoogleFonts.quicksand(color: Colors.white, fontSize: 32),
                       ),
                       const SizedBoxH28(),
@@ -64,7 +65,7 @@ class SignInPage extends StatelessWidget {
                         inputAction: TextInputAction.next,
                         controller: emailController,
                         icon: Icons.person_2_outlined,
-                        title: 'Enter your email adresss',
+                        title: SignInStrings.hintEmail,
                       ),
                       const SizedBoxH20(),
                       CustomTextField(
@@ -83,11 +84,11 @@ class SignInPage extends StatelessWidget {
                             )),
                         controller: passwordController,
                         icon: Icons.key,
-                        title: 'Enter your password',
+                        title: SignInStrings.hintPassword,
                       ),
                       const SizedBoxH28(),
                       CustomButton(
-                        title: 'Log In',
+                        title: SignInStrings.logInButtonText,
                         onTap: () async {
                           context
                               .read<SignInCubit>()

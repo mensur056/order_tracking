@@ -103,7 +103,9 @@ class HomePage extends StatelessWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    context.navigateToPage(const QuizDetailPage());
+                                    context.navigateToPage(QuizDetailPage(
+                                      items: projectValue,
+                                    ));
                                   },
                                   child: Text(
                                     'All Projects',
