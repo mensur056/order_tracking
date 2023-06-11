@@ -4,10 +4,11 @@ import 'package:order_app/core/bloc/auth/auth_cubit.dart';
 import 'package:order_app/core/bloc/detail/detail_cubit.dart';
 import 'package:order_app/core/bloc/home/home_cubit.dart';
 import 'package:order_app/core/bloc/sign_in/sign_in_cubit.dart';
+import 'package:order_app/core/bloc/sign_in/sign_in_state.dart';
 import 'package:order_app/core/data/contractors/i_detail_repository.dart';
 import 'package:order_app/core/data/contractors/i_home_repository.dart';
 import 'package:order_app/feature/screens/splash/splash_page.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'core/data/contractors/i_auth_repository.dart';
 import 'core/data/repository/impl_auth_repository.dart';
 import 'core/data/repository/impl_detail_repository.dart';
@@ -40,10 +41,17 @@ class MyApp extends StatelessWidget {
                     DetailOrderCubit(context.read<IDetailRepository>())..fetchOrders(),
               )
             ],
-            child: const MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Order Tracking',
-              home: SplashPage(),
+            child: BlocBuilder<SignInCubit, SignInState>(
+              builder: (context, state) {
+                return MaterialApp(
+                  locale: Locale(context.watch<SignInCubit>().defaultLanguageCode),
+                  debugShowCheckedModeBanner: false,
+                  title: 'Order Tracking',
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  localizationsDelegates: AppLocalizations.localizationsDelegates,
+                  home: const SplashPage(),
+                );
+              },
             ),
           ),
         ),

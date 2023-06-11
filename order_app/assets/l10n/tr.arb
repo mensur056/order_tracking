@@ -1,10 +1,8 @@
 {
-    "@@locale":"en",
+    "@@locale":"tr",
     "login":"Giriş",
     "hintEmail":"Email adresinizi girin",
     "hintPassword":"Parolanizi girin",
     "snackSuccess":"Başarili",
-    "snackError":"Hata",
-
-
+    "snackError":"Hata"
 }

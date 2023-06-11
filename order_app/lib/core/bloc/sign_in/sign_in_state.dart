@@ -13,3 +13,9 @@ class SignInIcon extends SignInState {
 
   SignInIcon({required this.isObscure});
 }
+
+class SignInLocalization extends SignInState {
+  String language;
+
+  SignInLocalization(this.language);
+}

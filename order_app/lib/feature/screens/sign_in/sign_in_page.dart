@@ -8,9 +8,9 @@ import 'package:order_app/feature/dialogs/custom_snack_bar.dart';
 import 'package:order_app/feature/screens/home/home_page.dart';
 import '../../../utility/constants/color.dart';
 import '../../../utility/constants/sized_boxs.dart';
-import '../../../utility/constants/strings.dart';
 import '../../global/custom_button.dart';
 import '../../global/custom_text_field.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({super.key});
@@ -19,90 +19,124 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: AppColors.backColor,
-      body: _body(),
-    );
-  }
-
-  BlocConsumer<SignInCubit, SignInState> _body() {
-    return BlocConsumer<SignInCubit, SignInState>(
-      listener: (context, state) async {
-        if (state is SignInFailure) {
-          AppSnackBar().customSnackBar(context, SignInStrings.snackBarError, Colors.red);
-        } else if (state is SignInSuccess) {
-          AppSnackBar().customSnackBar(context, SignInStrings.snackBarSuccess, Colors.green);
-          await Future.delayed(
-            const Duration(seconds: 2),
-            () {
-              context.navigateToPage(const HomePage());
-            },
-          );
-        }
-      },
-      buildWhen: (_, current) => current is! SignInSuccess,
-      listenWhen: (_, current) => current is SignInFailure || current is SignInSuccess,
-      builder: (context, state) {
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 100),
-            child: Form(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const _SignInLogo(),
-                      const SizedBoxH28(),
-                      Text(
-                        SignInStrings.logInButtonText,
-                        style: GoogleFonts.quicksand(color: Colors.white, fontSize: 32),
-                      ),
-                      const SizedBoxH28(),
-                      CustomTextField(
-                        inputAction: TextInputAction.next,
-                        controller: emailController,
-                        icon: Icons.person_2_outlined,
-                        title: SignInStrings.hintEmail,
-                      ),
-                      const SizedBoxH20(),
-                      CustomTextField(
-                        inputAction: TextInputAction.done,
-                        obscure: context.watch<SignInCubit>().isObscure,
-                        suffixIcon: InkWell(
-                            splashColor: Colors.transparent,
-                            onTap: () {
-                              context.read<SignInCubit>().changeVisibleIcon();
-                            },
-                            child: Icon(
-                              context.watch<SignInCubit>().isObscure
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: Colors.grey,
-                            )),
-                        controller: passwordController,
-                        icon: Icons.key,
-                        title: SignInStrings.hintPassword,
-                      ),
-                      const SizedBoxH28(),
-                      CustomButton(
-                        title: SignInStrings.logInButtonText,
-                        onTap: () async {
-                          context
-                              .read<SignInCubit>()
-                              .signInUser(emailController.text, passwordController.text);
-                        },
-                      )
-                    ],
+      body: BlocConsumer<SignInCubit, SignInState>(
+        listener: (context, state) async {
+          if (state is SignInFailure) {
+            AppSnackBar().customSnackBar(context, localization.snackError, Colors.red);
+          } else if (state is SignInSuccess) {
+            AppSnackBar().customSnackBar(context, localization.snackSuccess, Colors.green);
+            await Future.delayed(
+              const Duration(seconds: 2),
+              () {
+                context.navigateToPage(const HomePage());
+              },
+            );
+          }
+        },
+        buildWhen: (_, current) => current is! SignInSuccess,
+        listenWhen: (_, current) => current is SignInFailure || current is SignInSuccess,
+        builder: (context, state) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 100),
+              child: Form(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const _SignInLogo(),
+                        const SizedBoxH28(),
+                        Text(
+                          localization.login,
+                          style: GoogleFonts.quicksand(color: Colors.white, fontSize: 32),
+                        ),
+                        const SizedBoxH28(),
+                        CustomTextField(
+                          inputAction: TextInputAction.next,
+                          controller: emailController,
+                          icon: Icons.person_2_outlined,
+                          title: localization.hintEmail,
+                        ),
+                        const SizedBoxH20(),
+                        CustomTextField(
+                          inputAction: TextInputAction.done,
+                          obscure: context.watch<SignInCubit>().isObscure,
+                          suffixIcon: InkWell(
+                              splashColor: Colors.transparent,
+                              onTap: () {
+                                context.read<SignInCubit>().changeVisibleIcon();
+                              },
+                              child: Icon(
+                                context.watch<SignInCubit>().isObscure
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.grey,
+                              )),
+                          controller: passwordController,
+                          icon: Icons.key,
+                          title: localization.hintPassword,
+                        ),
+                        const SizedBoxH28(),
+                        CustomButton(
+                          title: localization.login,
+                          onTap: () async {
+                            context
+                                .read<SignInCubit>()
+                                .signInUser(emailController.text, passwordController.text);
+                          },
+                        ),
+                        const SizedBoxH20(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                context.read<SignInCubit>().selectLanguage('en');
+                              },
+                              child: const Chip(
+                                label: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'En',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                context.read<SignInCubit>().selectLanguage('tr');
+                              },
+                              child: const Chip(
+                                label: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Tr',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

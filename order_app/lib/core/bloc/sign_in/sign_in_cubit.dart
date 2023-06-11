@@ -9,6 +9,7 @@ class SignInCubit extends Cubit<SignInState> {
   ) : super(SignInInitial());
 
   final IAuthRepository _authRepository;
+  String defaultLanguageCode = 'tr';
   bool isObscure = true;
   Future<void> signInUser(String email, String password) async {
     emit(SignInInProgress());
@@ -23,5 +24,10 @@ class SignInCubit extends Cubit<SignInState> {
   void changeVisibleIcon() {
     isObscure = !isObscure;
     emit(SignInIcon(isObscure: isObscure));
+  }
+
+  void selectLanguage(String languageCode) {
+    defaultLanguageCode = languageCode;
+    emit(SignInLocalization(defaultLanguageCode));
   }
 }

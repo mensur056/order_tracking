@@ -1,11 +1,8 @@
-
 {
     "@@locale":"en",
     "login":"Log In",
     "hintEmail":"Enter your email adresss",
     "hintPassword":"Enter your password",
     "snackSuccess":"Success",
-    "snackError":"Error",
-
-
+    "snackError":"Error"
 }
